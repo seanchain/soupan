@@ -20,19 +20,13 @@ class SouPan
     self.parse @con
   end
   def parse con
-    begin
-      page = Nokogiri::HTML con, nil, "utf8"
-      res = page.css("a.l")
-      res.each do |link|
-        puts link["href"].gsub(/wap/, "share")
-        puts link.text
-        puts ""
-      end
-    rescue
-    end    
+    page = Nokogiri::HTML con, nil, "utf8"
+    res = page.css("a.l")
+    res.each do |link|
+      puts link.text.split("_")[0]
+      puts ""
+    end
   end
 end
 
-sp = SouPan.new
-sp.keyword = "Love Story m4a"
-sp.request
+
