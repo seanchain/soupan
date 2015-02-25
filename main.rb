@@ -2,6 +2,10 @@
 
 require "./sou.rb"
 
+keywd = ARGV.join " "
+
+puts keywd
+
 sp = SouPan.new
-sp.keyword = "Taylor Swift m4a"
+sp.keyword = keywd
 sp.work
