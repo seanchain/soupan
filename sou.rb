@@ -3,6 +3,7 @@
 require "open-uri"
 require "iconv"
 require "nokogiri"
+require "uri"
 
 class SouPan
   attr_writer :keyword
@@ -15,9 +16,10 @@ class SouPan
     self.getURL
   end
   def getURL
-    ary = @keyword.split " "
-    @keyword = ary.join "%20"
+    ary = @keyword.split " "; @keyword = ary.join "%20" if @keyword.include? " "
     url = "http://209.85.228.22/custom?hl=zh-CN&sitesearch=pan.baidu.com&q=#{@keyword}"
+    url = URI::escape url
+    puts url
     self.request url
   end
   def request url
